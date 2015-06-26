@@ -39,8 +39,18 @@ function GM:AddScoreboardAvatar( ScoreBoard )
 	ScoreBoard:AddColumn( "", 32, f, 360 ) // Avatar
 
 end
+// Added a points value from the Pointshop.
+function GM:AddScoreBoardPoints( ScoreBoard )
+	local f = function ( ply )
+		local p = ply:PS_GetPoints()
+		return p
+	end
+	ScoreBoard:AddColumn( "Points", 65, f, 0.5, nil, 5, 5)
+
+end
 
 function GM:AddScoreboardSpacer( ScoreBoard, iSize )
+
 	ScoreBoard:AddColumn( "", 16 ) // Gap
 end
 
@@ -48,27 +58,26 @@ function GM:AddScoreboardName( ScoreBoard )
 
 	local f = function( ply ) return ply:Name() end
 	ScoreBoard:AddColumn( "Name", nil, f, 10, nil, 4, 4 )
-
 end
 
 function GM:AddScoreboardKills( ScoreBoard )
 
 	local f = function( ply ) return ply:Frags() end
-	ScoreBoard:AddColumn( "Kills", 50, f, 0.5, nil, 6, 6 )
+	ScoreBoard:AddColumn( "Kills", 40, f, 0.5, nil, 5, 5 )
 
 end
 
 function GM:AddScoreboardDeaths( ScoreBoard )
 
 	local f = function( ply ) return ply:Deaths() end
-	ScoreBoard:AddColumn( "Deaths", 50, f, 0.5, nil, 6, 6 )
+	ScoreBoard:AddColumn( "Deaths", 60, f, 0.5, nil, 5, 5 )
 
 end
 
 function GM:AddScoreboardPing( ScoreBoard )
 
 	local f = function( ply ) return ply:Ping() end
-	ScoreBoard:AddColumn( "Ping", 50, f, 0.1, nil, 6, 6 )
+	ScoreBoard:AddColumn( "Ping", 40, f, 0.1, nil, 5, 5 )
 
 end
 
@@ -77,8 +86,8 @@ end
 function GM:PositionScoreboard( ScoreBoard )
 
 	if ( GAMEMODE.TeamBased ) then
-		ScoreBoard:SetSize( 800, ScrH() - 50 )
-		ScoreBoard:SetPos( (ScrW() - ScoreBoard:GetWide()) * 0.5,  25 )
+		ScoreBoard:SetSize( 1100, ScrH() - 250 )
+		ScoreBoard:SetPos( (ScrW() - ScoreBoard:GetWide()) * 0.5,  (ScrH() - 500) * 0.2 )
 	else
 		ScoreBoard:SetSize( 420, ScrH() - 64 )
 		ScoreBoard:SetPos( (ScrW() - ScoreBoard:GetWide()) / 2, 32 )
@@ -125,9 +134,10 @@ function GM:CreateScoreboard( ScoreBoard )
 	self:AddScoreboardAvatar( ScoreBoard )		// 1
 	self:AddScoreboardWantsChange( ScoreBoard )	// 2
 	self:AddScoreboardName( ScoreBoard )		// 3
-	self:AddScoreboardKills( ScoreBoard )		// 4
-	self:AddScoreboardDeaths( ScoreBoard )		// 5
-	self:AddScoreboardPing( ScoreBoard )		// 6
+	self:AddScoreBoardPoints( ScoreBoard )		// 4 -- added points - Joel
+	self:AddScoreboardKills( ScoreBoard )		// 5
+	self:AddScoreboardDeaths( ScoreBoard )		// 6
+	self:AddScoreboardPing( ScoreBoard )		// 7
 		
 	// Here we sort by these columns (and descending), in this order. You can define up to 4
 	ScoreBoard:SetSortColumns( { 4, true, 5, false, 3, false } )
