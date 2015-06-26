@@ -2,4 +2,4 @@
 Fretta gamemode
 
 This is the fretta gamemode
-test
+This is a very fun mode to play!
