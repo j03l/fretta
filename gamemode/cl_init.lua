@@ -54,7 +54,7 @@ function GM:InitPostEntity()
 		GAMEMODE:ShowTeam();
 	end
 	
-	GAMEMODE:ShowSplash();
+	//GAMEMODE:ShowSplash(); -- Got rid of first splash screen
 
 end
 
